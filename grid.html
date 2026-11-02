@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Nigeria Finance Grid — Carbon Actual</title>
+<meta name="description" content="One verified map of Nigeria's finance stack: settlement spine, licence classes, rails, vendors, obligations and professional services.">
+<style>
+:root{--ink:#0f1d26;--ink2:#223642;--muted:#5c6f79;--line:#dfe4e6;--paper:#fbfaf7;--amber:#b47b32;--green:#1f7a5a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:52px 24px 90px}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);font-weight:700;margin:0 0 14px}
+h1{font:600 clamp(30px,5vw,46px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.02em;margin:0 0 16px}
+.lede{font-size:17px;color:var(--ink2);max-width:62ch;margin:0 0 26px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 42px}
+.pill{font-size:12px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:#fff}
+.pill.ok{border-color:#bfe0d3;color:var(--green)}
+h2{font:600 22px/1.25 Georgia,serif;margin:44px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:14px;margin:0 0 20px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.lay{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px}
+.lay b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.lay h3{font:600 16px/1.35 Georgia,serif;margin:0 0 6px}
+.lay p{margin:0;font-size:13.5px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:#f7f8f7}
+tr:last-child td{border-bottom:none}
+td b{display:block;font-weight:600}
+td span{color:var(--muted);font-size:12.5px}
+.note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:12px;padding:18px 20px;margin:34px 0;font-size:14.5px;color:var(--ink2)}
+.note b{color:var(--ink)}
+.offer{background:var(--ink);color:#f6f2ea;border-radius:16px;padding:28px 26px;margin-top:44px}
+.offer h2{color:#fff;margin:0 0 10px}
+.offer p{color:#cfd8dd;font-size:14.5px;margin:0 0 12px;max-width:64ch}
+.offer ul{margin:0 0 18px;padding-left:20px;color:#cfd8dd;font-size:14px}
+.offer .price{font:600 26px/1 Georgia,serif;color:#e9c89a;display:block;margin:0 0 4px}
+.offer small{color:#93a3ad;font-size:12.5px}
+footer{margin-top:44px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px}
+</style></head><body><div class="wrap">
+<p class="kicker">Carbon Actual · Finance Grid · v0.1</p>
+<h1>The Nigeria Finance Grid</h1>
+<p class="lede">One map of how money actually moves in Nigeria — the settlement spine, the licence classes, the rails customers touch, the vendors behind them, the obligations attached, and the professional services that keep it standing. Built layer by layer. Verified node by node.</p>
+<div class="bar">
+  <span class="pill ok">Layer 0 · spine verified (14 nodes)</span>
+  <span class="pill">Layers 1–6 · scaffolded</span>
+  <span class="pill">Currency NGN</span>
+</div>
+
+<h2>Why a spine and not a directory</h2>
+<p class="sub">Directories rot. A spine holds. Everything financial in Nigeria eventually settles through one of a handful of rails or answers to one licence class. Map those first and every vendor, policy and service has somewhere to attach.</p>
+<div class="grid">
+  <div class="lay"><b>Layer 0</b><h3>Settlement & identity spine</h3><p>NIBSS rails, RTGS, BVN. Where finality happens.</p></div>
+  <div class="lay"><b>Layer 1</b><h3>Institutions & licences</h3><p>Banks, MFBs, PSBs, MMOs, PSSPs, PSS, sandbox. Who may do what, and with how much capital.</p></div>
+  <div class="lay"><b>Layer 2</b><h3>Customer rails</h3><p>USSD, POS, ATM, QR, wallets, virtual and gift cards, web and mobile channels.</p></div>
+  <div class="lay"><b>Layer 3</b><h3>Technology</h3><p>Core banking, switching, gateways, fraud and AML systems, identity vendors, credit bureaux, hosting.</p></div>
+  <div class="lay"><b>Layer 4</b><h3>Professional services</h3><p>Audit, tax, legal, actuarial, consulting, cybersecurity, training, HR and payroll.</p></div>
+  <div class="lay"><b>Layer 5</b><h3>Obligations</h3><p>Capital, reporting, AML/CFT, data protection, consumer protection, PCI and ISO.</p></div>
+  <div class="lay"><b>Layer 6</b><h3>Money products</h3><p>Escrow, collateral, payroll, rent, P2P, trading, digital assets, tokenised and fractionalised value.</p></div>
+</div>
+<h2>Layer 0 — verified</h2>
+<p class="sub">The spine, as it stands today. Sources are the operators and the regulator, not secondary commentary.</p>
+<table>
+<tr><th>Node</th><th>What it does</th><th>Under</th></tr>
+<tr><td><b>NIBSS</b><span>industry-owned central switch</span></td><td>Owns and operates national payment and settlement infrastructure</td><td>CBN</td></tr>
+<tr><td><b>NIP</b><span>instant transfer</span></td><td>Real-time interbank account-to-account credit; 9.7bn transfers in 2023. Failed transfers not reversed within 24 hours attract a sanction</td><td>CBN</td></tr>
+<tr><td><b>NEFT</b><span>batch transfer</span></td><td>Deferred net credit transfer, heavily used for payroll and pensions</td><td>CBN</td></tr>
+<tr><td><b>NAPS</b><span>ATM switching</span></td><td>Interbank ATM transaction switching</td><td>CBN</td></tr>
+<tr><td><b>Direct Debit</b><span>mandates</span></td><td>Recurring collections and mandate management between participants</td><td>CBN</td></tr>
+<tr><td><b>NQR</b><span>QR standard</span></td><td>National interoperable QR for merchant payments</td><td>CBN</td></tr>
+<tr><td><b>BVN</b><span>financial identity</span></td><td>Unique financial identity per customer, operated by NIBSS; enrolment and data-access controls have been tightened</td><td>CBN</td></tr>
+<tr><td><b>RTGS</b><span>final settlement</span></td><td>Central bank settlement of high-value and interbank obligations</td><td>CBN</td></tr>
+</table>
+
+<h2>Layer 1 — licence classes, verified</h2>
+<p class="sub">The distinction that decides most arguments: only an MMO may hold customer funds.</p>
+<table>
+<tr><th>Class</th><th>May do</th><th>Capital</th></tr>
+<tr><td><b>MMO</b><span>Mobile Money Operator</span></td><td>Hold customer wallet funds</td><td>NGN 2bn minimum</td></tr>
+<tr><td><b>PSSP</b><span>Switching &amp; Processing</span></td><td>Switch, process and route; may not hold funds. Combining with MMO requires a holding company</td><td>NGN 2bn minimum</td></tr>
+<tr><td><b>PSS</b><span>Payment Solution Service</span></td><td>Payment solution provision at entry tier</td><td>Below PSSP/MMO</td></tr>
+<tr><td><b>Sandbox</b><span>regulatory sandbox</span></td><td>Test novel models before full licensing; second cohort covered virtual assets and data-enabled services</td><td>n/a</td></tr>
+</table>
+
+<div class="note"><b>Licence status is a moving fact.</b> CBN has revoked licences of multiple payment service providers. Treat every licence claim in this market — including any you read here — as valid only for the date it was checked, and confirm with the regulator before relying on it.</div>
+<div class="offer">
+  <h2>Entry Map — NGN 650,000</h2>
+  <p>For a vendor, investor or new entrant trying to sell into Nigerian banking. You get the grid slice you need, written down: who buys your category, which licence class you sit beside, what certification and conformance you must clear before a bank can sign, and who signs.</p>
+  <ul>
+    <li>Your category mapped to the spine and the licence classes around it</li>
+    <li>The obligations you inherit by selling into a regulated buyer</li>
+    <li>The named buying functions per institution type, not a logo wall</li>
+    <li>A gap list of what you cannot answer today, with owners and dates</li>
+  </ul>
+  <span class="price">NGN 650,000</span>
+  <small>Fixed fee, one price, no split. Delivered in ten working days. Mapping and evidence, not legal opinion or certification.</small>
+</div>
+
+<h2>What this is not</h2>
+<p class="sub">Not a licence register, not legal advice, not an endorsement of any vendor, and not a claim that these layers are complete. Layers 1 to 6 are scaffolded and being populated from primary sources, one slice at a time. Anything unverified stays labelled unverified until it is checked against the operator or the regulator.</p>
+
+<footer>Carbon Actual · The Nigeria Finance Grid v0.1 · spine checked November 2026 · NGN only · <a href="/nano/" style="color:var(--amber)">Payment data residency check</a></footer>
+</div></body></html>
