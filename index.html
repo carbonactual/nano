@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payment Data Residency Check</title>
+<meta name="description" content="Two-minute self-assessment for Nigerian payment institutions preparing for CBN payment data localisation.">
+<style>
+:root{--ink:#0d1b26;--muted:#5d6b74;--line:#e3e0d8;--bg:#f7f5f0;--gold:#a87a2f;--red:#9b2c2c;--amber:#8a6516;--green:#1f6b45}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:40px 22px 72px}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:10px 0 12px;letter-spacing:-.02em}
+.lede{color:var(--muted);margin:0 0 26px;max-width:60ch}
+.note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px 16px;border-radius:8px;font-size:13.5px;color:var(--muted);margin:0 0 30px}
+.q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.q h3{font-size:15.5px;margin:0 0 10px;font-weight:600;line-height:1.35}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts label{border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13.5px;cursor:pointer;color:var(--muted);background:#fff}
+.opts input{position:absolute;opacity:0;width:0;height:0}
+.opts label:has(input:checked){border-color:var(--ink);color:var(--ink);font-weight:600;background:#f1efe8}
+.row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+input[type=text],input[type=email],input[type=number]{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font:inherit;background:#fff}
+button{margin-top:20px;width:100%;padding:15px;border:0;border-radius:10px;background:var(--ink);color:#fff;font:600 15px/1 inherit;letter-spacing:.04em;cursor:pointer}
+button:disabled{opacity:.6}
+#out{display:none;margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+.band{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.score{font-size:44px;font-weight:700;line-height:1;margin:8px 0 2px}
+#out ul{padding-left:18px;color:var(--muted);font-size:14.5px}
+.offer{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px}
+.price{font-weight:700;font-size:19px}
+small.fine{display:block;margin-top:18px;color:var(--muted);font-size:12.5px;line-height:1.5}
+</style></head><body><div class="wrap">
+<p class="kicker">Carbon Actual · Payment Compliance</p>
+<h1>Payment Data Residency Check</h1>
+<p class="lede">Ten questions on where your payment data lives and whether you can prove it. Two minutes, no login, no documents to upload.</p>
+<p class="note"><strong>Why this exists.</strong> The CBN circular of 16 June 2026 requires institutions processing payments in Nigeria to complete market-structure compliance by 31 December 2026 and to store payment transaction data locally from 1 January 2027. Institutions have asked for more time; the deadline has not moved.</p>
+
+<form id="f">
+  <div class="row" style="margin-bottom:14px">
+    <input type="text" id="institution" placeholder="Institution name" required>
+    <input type="text" id="itype" placeholder="Type (MFB, PSP, lender, SaaS)" required>
+  </div>
+  <div class="row" style="margin-bottom:20px">
+    <input type="text" id="cname" placeholder="Your name">
+    <input type="email" id="cemail" placeholder="Work email">
+  </div>
+  <div id="qs"></div>
+  <button type="submit" id="go">Run the check</button>
+</form>
+
+<div id="out">
+  <p class="band" id="band"></p>
+  <p class="score" id="scoreline"></p>
+  <p id="exposure" style="color:var(--muted);font-size:14px;margin:0 0 14px"></p>
+  <p style="margin:0 0 6px;font-weight:600">Biggest gaps</p>
+  <ul id="gaps"></ul>
+  <div class="offer">
+    <p style="margin:0 0 4px;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.12em">Recommended next step</p>
+    <p class="price" id="rung"></p>
+    <p id="what" style="color:var(--muted);margin:6px 0 0"></p>
+  </div>
+  <small class="fine">This is a self-assessment, not legal advice, an audit opinion or a certification. Scores reflect the answers you gave, not a review of your systems. Availability and pricing confirmed in writing before any engagement.</small>
+</div>
+<script>
+var QS=[
+ ["store","Where is payment transaction data stored today?","Wholly in Nigeria",["In Nigeria",0],["Partly outside",1],["Mostly or wholly outside",2]],
+ ["flowmap","Do you have a documented data-flow map?","We can show exactly where each field goes",["Yes, current",0],["Partial or out of date",1],["No",2]],
+ ["regions","Can you list your cloud regions and contracts?","Which provider, which region, which clause",["Yes, inventoried",0],["Roughly",1],["No",2]],
+ ["records","Are your NDPA processing records current?","Article 2.3 records of processing",["Yes",0],["Partial",1],["No",2]],
+ ["dpia","Has a DPIA been done in the last 12 months?","Data protection impact assessment",["Yes",0],["Older or partial",1],["No",2]],
+ ["breach","Do you have a tested 72-hour breach runbook?","Who calls whom, in what order",["Tested in last year",0],["Written, untested",1],["None",2]],
+ ["dpo","Do you have a DPO with a working desk?","Not just a name in a filing",["Yes, operating",0],["Named only",1],["No",2]],
+ ["vendors","Do vendor contracts carry residency clauses?","Subprocessors, storage, transfer",["Yes, all material vendors",0],["Some",1],["No",2]],
+ ["board","Is there a board-level evidence pack on residency?","Something you could hand a examiner",["Yes",0],["Draft",1],["No",2]],
+ ["recovery","Have you restored from an in-country copy?","Proving the local copy is real",["Tested",0],["Planned",1],["No",2]]
+];
+var host=document.getElementById('qs');
+QS.forEach(function(q){
+ var d=document.createElement('div');d.className='q';
+ var h=document.createElement('h3');h.textContent=q[1];d.appendChild(h);
+ var p=document.createElement('p');p.style.cssText='margin:0 0 10px;color:#5d6b74;font-size:13px';p.textContent=q[2];d.appendChild(p);
+ var o=document.createElement('div');o.className='opts';
+ for(var i=3;i<q.length;i++){
+  var lab=document.createElement('label');
+  var inp=document.createElement('input');inp.type='radio';inp.name=q[0];inp.value=q[i][1];
+  lab.appendChild(inp);lab.appendChild(document.createTextNode(q[i][0]));o.appendChild(lab);
+ }
+ d.appendChild(o);host.appendChild(d);
+});
+var API='https://base44.app/api/apps/6a35d29877854f048ff4cd16/functions/residencyScan';
+document.getElementById('f').addEventListener('submit',async function(e){
+ e.preventDefault();
+ var answers={};QS.forEach(function(q){var c=document.querySelector('input[name="'+q[0]+'"]:checked');answers[q[0]]=c?Number(c.value):2;});
+ var btn=document.getElementById('go');btn.disabled=true;btn.textContent='Checking...';
+ try{
+  var r=await fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+   institution:document.getElementById('institution').value,
+   institution_type:document.getElementById('itype').value,
+   contact_name:document.getElementById('cname').value,
+   contact_email:document.getElementById('cemail').value,
+   answers:answers,source:'selftest_page',save:true})});
+  var d=await r.json();
+  if(!d.success)throw new Error(d.error||'failed');
+  var col={ready:'#1f6b45',amber:'#8a6516',red:'#9b2c2c',critical:'#9b2c2c'}[d.band];
+  var b=document.getElementById('band');b.textContent=d.band.toUpperCase()+' · '+d.score_pct+'/100';b.style.color=col;
+  document.getElementById('scoreline').textContent=d.score+' risk points';
+  document.getElementById('exposure').textContent='Indicative NDPA exposure: NGN '+d.fine_exposure_ngn.toLocaleString()+' (statutory ceiling NGN 10m or 2% of annual gross revenue, whichever is lower).';
+  var g=document.getElementById('gaps');g.innerHTML='';d.top_gaps.forEach(function(x){var li=document.createElement('li');li.textContent=x.gap+' — '+x.state;g.appendChild(li);});
+  document.getElementById('rung').textContent=d.recommended_rung.toUpperCase()+' · NGN '+d.price_ngn.toLocaleString();
+  document.getElementById('what').textContent='Reply with this result and we will confirm scope, dates and the evidence you would receive.';
+  var out=document.getElementById('out');out.style.display='block';out.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){
+  alert('Could not score that just now. Please try again.');
+ }finally{btn.disabled=false;btn.textContent='Run the check';}
+});
+</script></div></body></html>
